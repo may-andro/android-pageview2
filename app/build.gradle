@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolVersion
+
+    defaultConfig {
+        applicationId "com.mayandro.viewpager2demo"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.61"
+    implementation 'androidx.core:core-ktx:1.1.0'
+
+    // Coroutine
+    implementation deps.kotlin.coroutine
+
+    // App dependencies
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.viewpager2
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:4.7.1"
+
+    // design
+    implementation deps.design.material
+
+    // Architecture Components
+    implementation deps.arch.extensions
+    implementation deps.arch.viewmodel
+    kapt deps.arch.compiler
+
+
+    // Glide
+    implementation deps.imageLib.glide
+
+    // Databinding compiler
+    kapt deps.binding.databinding
+    
+    // JetPack Shared Preference Plugins
+    implementation deps.sharedpreferences.preference
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:2.25.2"
+    implementation "com.google.dagger:dagger-android-support:2.25.2"
+    kapt "com.google.dagger:dagger-compiler:2.25.2"
+    kapt "com.google.dagger:dagger-android-processor:2.25.2"
+}
